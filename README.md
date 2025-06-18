@@ -16,9 +16,9 @@ Sanpham( Tên SP ; Mã SP ; Giá ; Tồn kho )
 
 Giaodịch( Mã gd ; Tên KH ; Tên SP ; Số lượng )
 
-Nhânviên
+Nhânviên( Tên ; Mã NV ; Lương )
 
-Nhàcungcấp
+Nhàcungcấp( Tên ; Giá ; Số lượng ) 
 
 ```
 ## Miêu tả
