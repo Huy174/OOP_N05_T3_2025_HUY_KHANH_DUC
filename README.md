@@ -2,24 +2,28 @@
 
 Ứng dụng quản lý cửa hàng
 
-Describe and Analyse the Project by the concept of OOP
-'''
+# Describe and Analyse the Project by the concept of OOP
 
-Đốitượng
+## Phân tích
 
-KháchHàng
+Đối tượng:
 
-Sanpham
+```
 
-Giaodịch(Khách hàng mua đồ)
+KháchHàng( Tên ; Mã KH ; sđt ; Hạng )
+
+Sanpham( Tên SP ; Mã SP ; Giá ; Tồn kho )
+
+Giaodịch( Mã gd ; Tên KH ; Tên SP ; Số lượng )
 
 Nhânviên
 
 Nhàcungcấp
-'''
 
+```
+## Miêu tả
 
-#Thành viên:
+# Thành viên:
 Huy(MSV:24100119)
 Khánh(MSV:24100013)
 Đức(MSV:24100003)
