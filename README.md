@@ -3,6 +3,7 @@
 Ứng dụng quản lý cửa hàng
 
 Describe and Analyse the Project by the concept of OOP
+'''
 
 Đốitượng
 
@@ -15,10 +16,7 @@ Giaodịch(Khách hàng mua đồ)
 Nhânviên
 
 Nhàcungcấp
-
-Quảnlýthunhập
-
-Tàikhoản
+'''
 
 
 #Thành viên:
