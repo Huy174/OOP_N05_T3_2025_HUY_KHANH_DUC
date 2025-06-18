@@ -9,6 +9,7 @@ Describe and Analyse the Project by the concept of OOP
 Khách Hàng
 Sanpham
 Giaodịch(Khách hàng mua đồ)
+
 Nhânviên
 Nhàcungcấp
 Quảnlýthunhập
