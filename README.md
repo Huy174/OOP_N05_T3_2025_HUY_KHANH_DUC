@@ -7,12 +7,17 @@ Describe and Analyse the Project by the concept of OOP
 Đối tượng
 
 Khách Hàng
+
 Sanpham
+
 Giaodịch(Khách hàng mua đồ)
 
 Nhânviên
+
 Nhàcungcấp
+
 Quảnlýthunhập
+
 Tàikhoản
 
 
