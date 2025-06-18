@@ -4,9 +4,9 @@
 
 Describe and Analyse the Project by the concept of OOP
 
-Đối tượng
+Đốitượng
 
-Khách Hàng
+KháchHàng
 
 Sanpham
 
