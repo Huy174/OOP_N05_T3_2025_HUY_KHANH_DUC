@@ -10,7 +10,7 @@
 
 ```
 
-KháchHàng( Tên ; Mã KH ; sđt ; Hạng )
+KháchHàng( Tên ; Mã KH ; sđt ; Hạng ;địa )
 
 Sanpham( Tên SP ; Mã SP ; Giá ; Tồn kho )
 
