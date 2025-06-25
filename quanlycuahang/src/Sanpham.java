@@ -65,7 +65,6 @@ public class Sanpham {
         return SoLuongCungCap;
     }
 
-    // In thông tin chi tiết sản phẩm
     public void hienThiThongTin() {
         System.out.println("Ma SP       : " + MaSanPham);
         System.out.println("Ten SP      : " + TenSanPham);
