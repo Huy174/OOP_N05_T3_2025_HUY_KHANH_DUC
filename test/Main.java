@@ -4,68 +4,132 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        Khachhang kh = new Khachhang();
-        System.out.println("=== NHAP THONG TIN KHACH HANG ===");
-        System.out.print("Ma KH: "); kh.setMaKhachHang(sc.nextLine());
-        System.out.print("Ten KH: "); kh.setTenKhachHang(sc.nextLine());
-        System.out.print("Dia chi: "); kh.setDiaChi(sc.nextLine());
-        System.out.print("So dien thoai: "); kh.setSoDienThoai(sc.nextLine());
-        System.out.print("Hang: "); kh.setHang(sc.nextLine());
+        QuanLyKhachHang qlKH = new QuanLyKhachHang();
+        QuanLyNhanVien qlNV = new QuanLyNhanVien();
+        QuanLySanPham qlSP = new QuanLySanPham();
+        QuanLyGiaoDich qlGD = new QuanLyGiaoDich();
 
-        Nhanvien nv = new Nhanvien();
-        System.out.println("\n=== NHAP THONG TIN NHAN VIEN ===");
-        System.out.print("Ma NV: "); nv.setMaNhanVien(sc.nextLine());
-        System.out.print("Ten NV: "); nv.setTenNhanVien(sc.nextLine());
-        System.out.print("Luong: "); nv.setLuong(Double.parseDouble(sc.nextLine()));
+        int chon;
 
-        System.out.print("\nNhap so luong san pham: ");
-        int soSanPham = Integer.parseInt(sc.nextLine());
-        Sanpham[] danhSachSP = new Sanpham[soSanPham];
+        do {
+            System.out.println("\n========== MENU CHINH ==========");
+            System.out.println("1. Quan ly Khach Hang");
+            System.out.println("2. Quan ly Nhan Vien");
+            System.out.println("3. Quan ly San Pham");
+            System.out.println("4. Quan ly Giao Dich");
+            System.out.println("0. Thoat");
+            System.out.print("Chon chuc nang: ");
+            chon = Integer.parseInt(sc.nextLine());
 
-        for (int i = 0; i < soSanPham; i++) {
-            System.out.println("\n--- San pham " + (i + 1) + " ---");
-            danhSachSP[i] = new Sanpham();
-            System.out.print("Ma SP: "); danhSachSP[i].setMaSanPham(sc.nextLine());
-            System.out.print("Ten SP: "); danhSachSP[i].setTenSanPham(sc.nextLine());
-            System.out.print("Gia ban: "); danhSachSP[i].setGia(Double.parseDouble(sc.nextLine()));
-            System.out.print("Ton kho: "); danhSachSP[i].setTonKho(Integer.parseInt(sc.nextLine()));
-            System.out.print("Ten NCC: "); danhSachSP[i].setTenNhaCungCap(sc.nextLine());
-            System.out.print("Gia cung cap: "); danhSachSP[i].setGiaCungCap(Double.parseDouble(sc.nextLine()));
-            System.out.print("So luong NCC cung cap: "); danhSachSP[i].setSoLuongCungCap(Integer.parseInt(sc.nextLine()));
-        }
-
-        Giaodich gd = new Giaodich();
-        System.out.println("\n=== NHAP GIAO DICH ===");
-        System.out.print("Ma GD: "); gd.setMaGiaoDich(sc.nextLine());
-        gd.setTenKhachHang(kh.getTenKhachHang());
-
-        for (int i = 0; i < soSanPham; i++) {
-            System.out.print("Nhap so luong mua san pham \"" + danhSachSP[i].getTenSanPham() + "\": ");
-            int sl = Integer.parseInt(sc.nextLine());
-            if (sl > 0) {
-                gd.themSanPham(new ChiTietGiaoDich(
-                    danhSachSP[i].getTenSanPham(), sl, danhSachSP[i].getGia()
-                ));
+            switch (chon) {
+                case 1:
+                    menuKhachHang(qlKH, sc);
+                    break;
+                case 2:
+                    menuNhanVien(qlNV, sc);
+                    break;
+                case 3:
+                    menuSanPham(qlSP, sc);
+                    break;
+                case 4:
+                    menuGiaoDich(qlGD, sc);
+                    break;
+                case 0:
+                    System.out.println("Da thoat chuong trinh.");
+                    break;
+                default:
+                    System.out.println("Chuc nang khong hop le.");
             }
-        }
-
-        System.out.println("\n========== KET QUA ==========");
-        System.out.println("\n> Thong tin khach hang:");
-        kh.hienThiThongTin();
-
-        System.out.println("\n> Thong tin nhan vien:");
-        nv.hienThiThongTin();
-
-        System.out.println("\n> Danh sach san pham:");
-        for (Sanpham sp : danhSachSP) {
-            sp.hienThiThongTin();
-            System.out.println();
-        }
-
-        System.out.println("> Thong tin giao dich:");
-        gd.hienThiThongTin();
+        } while (chon != 0);
 
         sc.close();
     }
-}
 
+    // Submenu cho Khach Hang
+    public static void menuKhachHang(QuanLyKhachHang qlKH, Scanner sc) {
+        int chon;
+        do {
+            System.out.println("\n=== MENU KHACH HANG ===");
+            System.out.println("1. Them");
+            System.out.println("2. Hien thi");
+            System.out.println("3. Sua");
+            System.out.println("4. Xoa");
+            System.out.println("0. Quay lai");
+            System.out.print("Chon: ");
+            chon = Integer.parseInt(sc.nextLine());
+
+            switch (chon) {
+                case 1: qlKH.themKhachHang(); break;
+                case 2: qlKH.hienThiTatCa(); break;
+                case 3: qlKH.suaKhachHang(); break;
+                case 4: qlKH.xoaKhachHang(); break;
+            }
+        } while (chon != 0);
+    }
+
+    // Submenu cho Nhan Vien
+    public static void menuNhanVien(QuanLyNhanVien qlNV, Scanner sc) {
+        int chon;
+        do {
+            System.out.println("\n=== MENU NHAN VIEN ===");
+            System.out.println("1. Them");
+            System.out.println("2. Hien thi");
+            System.out.println("3. Sua");
+            System.out.println("4. Xoa");
+            System.out.println("0. Quay lai");
+            System.out.print("Chon: ");
+            chon = Integer.parseInt(sc.nextLine());
+
+            switch (chon) {
+                case 1: qlNV.themNhanVien(); break;
+                case 2: qlNV.hienThiTatCa(); break;
+                case 3: qlNV.suaNhanVien(); break;
+                case 4: qlNV.xoaNhanVien(); break;
+            }
+        } while (chon != 0);
+    }
+
+    // Submenu cho San Pham
+    public static void menuSanPham(QuanLySanPham qlSP, Scanner sc) {
+        int chon;
+        do {
+            System.out.println("\n=== MENU SAN PHAM ===");
+            System.out.println("1. Them");
+            System.out.println("2. Hien thi");
+            System.out.println("3. Sua");
+            System.out.println("4. Xoa");
+            System.out.println("0. Quay lai");
+            System.out.print("Chon: ");
+            chon = Integer.parseInt(sc.nextLine());
+
+            switch (chon) {
+                case 1: qlSP.themSanPham(); break;
+                case 2: qlSP.hienThiTatCa(); break;
+                case 3: qlSP.suaSanPham(); break;
+                case 4: qlSP.xoaSanPham(); break;
+            }
+        } while (chon != 0);
+    }
+
+    // Submenu cho Giao Dich
+    public static void menuGiaoDich(QuanLyGiaoDich qlGD, Scanner sc) {
+        int chon;
+        do {
+            System.out.println("\n=== MENU GIAO DICH ===");
+            System.out.println("1. Them");
+            System.out.println("2. Hien thi");
+            System.out.println("3. Sua");
+            System.out.println("4. Xoa");
+            System.out.println("0. Quay lai");
+            System.out.print("Chon: ");
+            chon = Integer.parseInt(sc.nextLine());
+
+            switch (chon) {
+                case 1: qlGD.themGiaoDich(); break;
+                case 2: qlGD.hienThiTatCa(); break;
+                case 3: qlGD.suaGiaoDich(); break;
+                case 4: qlGD.xoaGiaoDich(); break;
+            }
+        } while (chon != 0);
+    }
+}

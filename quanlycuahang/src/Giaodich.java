@@ -44,4 +44,8 @@ public class Giaodich {
         }
         System.out.println("TONG TIEN: " + tinhTongTien() + " VND");
     }
+    public void xoaTatCaSanPham() {
+    danhSachSP.clear();
+}
+
 }
