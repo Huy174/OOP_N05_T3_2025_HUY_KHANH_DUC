@@ -21,8 +21,9 @@ Nhânviên( Tên ; Mã NV ; Lương )
 Nhàcungcấp( Tên ; Giá ; Số lượng ) 
 
 ```
-## Miêu tả
-
+## Sơ đồ
+## 1.1
+<img width="996" height="662" alt="Image" src="https://github.com/user-attachments/assets/2670f4dd-7e51-4ff2-bca5-10dd0bfc1ebb" />
 # Thành viên:
 Huy(MSV:24100119)
 Khánh(MSV:24100013)
