@@ -24,6 +24,7 @@ Nhàcungcấp( Tên ; Giá ; Số lượng )
 ## Sơ đồ
 ## 1.1
 <img width="996" height="662" alt="Image" src="https://github.com/user-attachments/assets/2670f4dd-7e51-4ff2-bca5-10dd0bfc1ebb" />
+
 ## 1.2
 <img width="1914" height="407" alt="Image" src="https://github.com/user-attachments/assets/1cd3a409-4a0c-43e3-9364-04e0544962f1" />
 # Thành viên:
