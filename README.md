@@ -21,7 +21,12 @@ Nhânviên( Tên ; Mã NV ; Lương )
 Nhàcungcấp( Tên ; Giá ; Số lượng ) 
 
 ```
-## Miêu tả
+## SƠ ĐỒ UML
+## 1.1 
+<img width="996" height="662" alt="Image" src="https://github.com/user-attachments/assets/cbada2ff-f2fe-460a-ad0a-92615e2b6484" />
+## 1.2
+
+<img width="1914" height="407" alt="Image" src="https://github.com/user-attachments/assets/d4d9b234-778c-4a1b-b578-de0d146af002" />
 
 # Thành viên:
 Huy(MSV:24100119)
