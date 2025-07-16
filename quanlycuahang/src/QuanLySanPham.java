@@ -5,6 +5,7 @@ public class QuanLySanPham {
     private ArrayList<Sanpham> danhSach = new ArrayList<>();
     private Scanner sc = new Scanner(System.in);
 
+    //CREATE
     public void themSanPham() {
         System.out.print("Nhap ma san pham: ");
         String ma = sc.nextLine();
@@ -35,6 +36,7 @@ public class QuanLySanPham {
         System.out.println("=> Da them san pham.");
     }
 
+    //READ
     public void hienThiTatCa() {
         if (danhSach.isEmpty()) {
             System.out.println("Danh sach san pham trong.");
@@ -46,6 +48,7 @@ public class QuanLySanPham {
         }
     }
 
+    //UPDATE
     public void suaSanPham() {
         System.out.print("Nhap ma SP can sua: ");
         String ma = sc.nextLine();
@@ -74,6 +77,7 @@ public class QuanLySanPham {
         System.out.println("Khong tim thay san pham.");
     }
 
+    //DELETE
     public void xoaSanPham() {
         System.out.print("Nhap ma SP can xoa: ");
         String ma = sc.nextLine();

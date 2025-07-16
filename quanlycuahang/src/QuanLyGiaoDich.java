@@ -6,21 +6,32 @@ public class QuanLyGiaoDich {
     private Scanner sc = new Scanner(System.in);
 
     // CREATE
-    public void themGiaoDich() {
-        Giaodich gd = new Giaodich();
+    public void themGiaoDich(QuanLyKhachHang qlKH) {
+        System.out.print("Nhap ma khach hang: ");
+        String maKH = sc.nextLine();
+
+        Khachhang kh = qlKH.timKhachHangTheoMa(maKH);
+        if (kh == null) {
+            System.out.println("Khach hang chua ton tai. Them moi khach hang:");
+            qlKH.themKhachHang();
+            kh = qlKH.timKhachHangTheoMa(maKH); 
+        }
+
+        String tenKH = kh.getTenKhachHang();
 
         System.out.print("Nhap ma giao dich: ");
-        gd.setMaGiaoDich(sc.nextLine());
+        String maGD = sc.nextLine();
 
-        System.out.print("Nhap ten khach hang: ");
-        gd.setTenKhachHang(sc.nextLine());
+        Giaodich gd = new Giaodich();
+        gd.setMaGiaoDich(maGD);
+        gd.setTenKhachHang(tenKH);
 
-        System.out.print("Nhap so san pham: ");
+        System.out.print("Nhap so san pham muon them: ");
         int soSP = Integer.parseInt(sc.nextLine());
 
         for (int i = 0; i < soSP; i++) {
             System.out.println("San pham thu " + (i + 1) + ":");
-            System.out.print(" - Ten san pham: ");
+            System.out.print(" - Ten: ");
             String ten = sc.nextLine();
             System.out.print(" - So luong: ");
             int sl = Integer.parseInt(sc.nextLine());
@@ -57,11 +68,10 @@ public class QuanLyGiaoDich {
                 System.out.print("Nhap ten khach hang moi: ");
                 gd.setTenKhachHang(sc.nextLine());
 
-                // Clear và thêm lại danh sách sản phẩm
                 System.out.print("Nhap lai so san pham: ");
                 int soSP = Integer.parseInt(sc.nextLine());
-                gd.xoaTatCaSanPham();
 
+                gd.xoaTatCaSanPham();
 
                 for (int i = 0; i < soSP; i++) {
                     System.out.println("San pham thu " + (i + 1) + ":");
@@ -100,3 +110,4 @@ public class QuanLyGiaoDich {
         System.out.println("Khong tim thay giao dich.");
     }
 }
+

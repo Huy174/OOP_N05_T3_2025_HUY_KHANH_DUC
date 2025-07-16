@@ -7,6 +7,15 @@ public class Giaodich {
 
     public Giaodich() {}
 
+    // Constructor moi
+    public Giaodich(String maGD, String tenKH, String tenSP, int soLuong) {
+        this.maGiaoDich = maGD;
+        this.tenKhachHang = tenKH;
+
+        ChiTietGiaoDich ctd = new ChiTietGiaoDich(tenSP, soLuong, 0); // Gia mac dinh la 0
+        danhSachSP.add(ctd);
+    }
+
     public void setMaGiaoDich(String ma) {
         maGiaoDich = ma;
     }
@@ -27,6 +36,10 @@ public class Giaodich {
         danhSachSP.add(ctd);
     }
 
+    public void xoaTatCaSanPham() {
+        danhSachSP.clear();
+    }
+
     public double tinhTongTien() {
         double tong = 0;
         for (ChiTietGiaoDich ctd : danhSachSP) {
@@ -44,8 +57,5 @@ public class Giaodich {
         }
         System.out.println("TONG TIEN: " + tinhTongTien() + " VND");
     }
-    public void xoaTatCaSanPham() {
-    danhSachSP.clear();
 }
 
-}

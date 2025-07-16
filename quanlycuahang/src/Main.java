@@ -32,7 +32,7 @@ public class Main {
                     menuSanPham(qlSP, sc);
                     break;
                 case 4:
-                    menuGiaoDich(qlGD, sc);
+                    menuGiaoDich(qlGD, qlKH, sc);  // ✅ Gọi đúng với qlKH
                     break;
                 case 0:
                     System.out.println("Da thoat chuong trinh.");
@@ -45,7 +45,6 @@ public class Main {
         sc.close();
     }
 
-    // Submenu cho Khach Hang
     public static void menuKhachHang(QuanLyKhachHang qlKH, Scanner sc) {
         int chon;
         do {
@@ -67,7 +66,7 @@ public class Main {
         } while (chon != 0);
     }
 
-    // Submenu cho Nhan Vien
+ 
     public static void menuNhanVien(QuanLyNhanVien qlNV, Scanner sc) {
         int chon;
         do {
@@ -89,7 +88,7 @@ public class Main {
         } while (chon != 0);
     }
 
-    // Submenu cho San Pham
+   
     public static void menuSanPham(QuanLySanPham qlSP, Scanner sc) {
         int chon;
         do {
@@ -111,8 +110,7 @@ public class Main {
         } while (chon != 0);
     }
 
-    // Submenu cho Giao Dich
-    public static void menuGiaoDich(QuanLyGiaoDich qlGD, Scanner sc) {
+    public static void menuGiaoDich(QuanLyGiaoDich qlGD, QuanLyKhachHang qlKH, Scanner sc) {
         int chon;
         do {
             System.out.println("\n=== MENU GIAO DICH ===");
@@ -125,7 +123,7 @@ public class Main {
             chon = Integer.parseInt(sc.nextLine());
 
             switch (chon) {
-                case 1: qlGD.themGiaoDich(); break;
+                case 1: qlGD.themGiaoDich(qlKH); break;  
                 case 2: qlGD.hienThiTatCa(); break;
                 case 3: qlGD.suaGiaoDich(); break;
                 case 4: qlGD.xoaGiaoDich(); break;

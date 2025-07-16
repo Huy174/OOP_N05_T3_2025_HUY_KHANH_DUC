@@ -4,6 +4,8 @@ import java.util.Scanner;
 public class QuanLyKhachHang {
     private ArrayList<Khachhang> danhSach = new ArrayList<>();
     private Scanner sc = new Scanner(System.in);
+
+    // CREATE
     public void themKhachHang() {
         System.out.print("Nhap ma khach hang: ");
         String ma = sc.nextLine();
@@ -26,6 +28,8 @@ public class QuanLyKhachHang {
         danhSach.add(kh);
         System.out.println("=> Da them khach hang.");
     }
+
+    // READ
     public void hienThiTatCa() {
         if (danhSach.isEmpty()) {
             System.out.println("Danh sach khach hang trong.");
@@ -38,6 +42,7 @@ public class QuanLyKhachHang {
         }
     }
 
+    // UPDATE
     public void suaKhachHang() {
         System.out.print("Nhap ma KH can sua: ");
         String ma = sc.nextLine();
@@ -60,6 +65,7 @@ public class QuanLyKhachHang {
         System.out.println("Khong tim thay khach hang.");
     }
 
+    // DELETE
     public void xoaKhachHang() {
         System.out.print("Nhap ma KH can xoa: ");
         String ma = sc.nextLine();
@@ -74,6 +80,17 @@ public class QuanLyKhachHang {
 
         System.out.println("Khong tim thay khach hang.");
     }
+
+    // SEARCH
+    public Khachhang timKhachHangTheoMa(String maKH) {
+        for (Khachhang kh : danhSach) {
+            if (kh.getMaKhachHang().equalsIgnoreCase(maKH)) {
+                return kh;
+            }
+        }
+        return null;
+    }
 }
+
 
 
