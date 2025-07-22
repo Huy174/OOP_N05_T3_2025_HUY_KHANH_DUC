@@ -17,6 +17,7 @@ public class Main {
             System.out.println("2. Quan ly Nhan Vien");
             System.out.println("3. Quan ly San Pham");
             System.out.println("4. Quan ly Giao Dich");
+            System.out.println("5. Kiem tra ton kho");
             System.out.println("0. Thoat");
             System.out.print("Chon chuc nang: ");
             chon = Integer.parseInt(sc.nextLine());
@@ -32,7 +33,10 @@ public class Main {
                     menuSanPham(qlSP, sc);
                     break;
                 case 4:
-                    menuGiaoDich(qlGD, qlKH, sc);  // ✅ Gọi đúng với qlKH
+                    menuGiaoDich(qlGD, qlKH, qlSP, sc);
+                    break;
+                case 5:
+                    qlGD.kiemTraTonKhoVaGiaoDich(qlSP);
                     break;
                 case 0:
                     System.out.println("Da thoat chuong trinh.");
@@ -66,7 +70,6 @@ public class Main {
         } while (chon != 0);
     }
 
- 
     public static void menuNhanVien(QuanLyNhanVien qlNV, Scanner sc) {
         int chon;
         do {
@@ -88,7 +91,6 @@ public class Main {
         } while (chon != 0);
     }
 
-   
     public static void menuSanPham(QuanLySanPham qlSP, Scanner sc) {
         int chon;
         do {
@@ -110,7 +112,7 @@ public class Main {
         } while (chon != 0);
     }
 
-    public static void menuGiaoDich(QuanLyGiaoDich qlGD, QuanLyKhachHang qlKH, Scanner sc) {
+    public static void menuGiaoDich(QuanLyGiaoDich qlGD, QuanLyKhachHang qlKH, QuanLySanPham qlSP, Scanner sc) {
         int chon;
         do {
             System.out.println("\n=== MENU GIAO DICH ===");
@@ -123,11 +125,12 @@ public class Main {
             chon = Integer.parseInt(sc.nextLine());
 
             switch (chon) {
-                case 1: qlGD.themGiaoDich(qlKH); break;  
+                case 1: qlGD.themGiaoDich(qlKH, qlSP); break;
                 case 2: qlGD.hienThiTatCa(); break;
-                case 3: qlGD.suaGiaoDich(); break;
-                case 4: qlGD.xoaGiaoDich(); break;
+                case 3: qlGD.suaGiaoDich(qlSP); break;
+                case 4: qlGD.xoaGiaoDich(qlSP); break;
             }
         } while (chon != 0);
     }
 }
+

@@ -12,7 +12,7 @@ public class Giaodich {
         this.maGiaoDich = maGD;
         this.tenKhachHang = tenKH;
 
-        ChiTietGiaoDich ctd = new ChiTietGiaoDich(tenSP, soLuong, 0); // Gia mac dinh la 0
+        ChiTietGiaoDich ctd = new ChiTietGiaoDich(tenSP, soLuong, 0); // Giá mặc định là 0
         danhSachSP.add(ctd);
     }
 
@@ -57,5 +57,8 @@ public class Giaodich {
         }
         System.out.println("TONG TIEN: " + tinhTongTien() + " VND");
     }
-}
 
+    public ArrayList<ChiTietGiaoDich> getDanhSachSanPham() {
+        return danhSachSP;
+    }
+}
