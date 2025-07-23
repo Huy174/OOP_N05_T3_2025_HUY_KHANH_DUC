@@ -1,4 +1,4 @@
-public class Student implements Comparable {
+public class Student implements Comparable<Student> {
     private String name;
     private float gpa;
 
@@ -9,10 +9,11 @@ public class Student implements Comparable {
 
     public Student() {}
 
-    public int compareTo(Object o) {
-        if (((Student) o).gpa < this.gpa)
+    @Override
+    public int compareTo(Student o) {
+        if (o.gpa < this.gpa)
             return 1;
-        else if (((Student) o).gpa > this.gpa)
+        else if (o.gpa > this.gpa)
             return -1;
         else
             return 0;
@@ -30,8 +31,7 @@ public class Student implements Comparable {
         Student s1 = new Student("Alice", 3.5f);
         Student s2 = new Student("Bob", 3.8f);
 
-        System.out.println(s1.compareTo(s2));
-        System.out.println(s2.compareTo(s1));
+        System.out.println(s1.compareTo(s2)); // -1 vì 3.5 < 3.8
+        System.out.println(s2.compareTo(s1)); // 1 vì 3.8 > 3.5
     }
 }
-
