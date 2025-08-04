@@ -1,6 +1,6 @@
 # OOP_N05_T3_2025_HUY_KHANH_DUC
 
-Ứng dụng quản lý cửa hàng
+Ứng dụng quản lý cửa hàng sách
 
 # Describe and Analyse the Project by the concept of OOP
 
