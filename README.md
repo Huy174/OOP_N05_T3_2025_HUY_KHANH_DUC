@@ -12,7 +12,7 @@
 
 KháchHàng( Tên ; Mã KH ; sđt ; Hạng ;địa )
 
-Sanpham( Tên SP ; Mã SP ; Giá ; Tồn kho )
+Sach( Tên SP ; Mã SP ; Giá ; Tồn kho )
 
 Giaodịch( Mã gd ; Tên KH ; Tên SP ; Số lượng )
 
