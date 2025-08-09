@@ -10,15 +10,13 @@
 
 ```
 
-KháchHàng( Tên ; Mã KH ; sđt ; Hạng ;địa )
+KháchHàng( Tên ; Mã KH ; sđt ;địa chỉ )
 
-Sach( Tên SP ; Mã SP ; Giá ; Tồn kho )
+Sach( Tên sách; Mã sách ; Giá ; Tồn kho )
 
-Giaodịch( Mã gd ; Tên KH ; Tên SP ; Số lượng )
+Giaodịch( Mã gd ; Tên KH ; Tên sách ; Số lượng )
 
-Nhânviên( Tên ; Mã NV ; Lương )
-
-Nhàcungcấp( Tên ; Giá ; Số lượng ) 
+Nhàxuấtbản( Tên ;Số lượng ) 
 
 ```
 ## Miêu tả
