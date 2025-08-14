@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HKD STORE - Giới thiệu</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        :root {
+            --primary: #2E3B5E;
+            --secondary: #4A90E2;
+            --muted: #f0f8ff;
+            --card: #ffffff;
+            --accent: #E9F4FF;
+        }
+        .nav-link:hover { color: var(--secondary); }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: width 0.3s ease-in-out;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .chart-container { height: 320px; padding: 1.5rem; position: relative; }
+        .chart-bar {
+            background-color: var(--secondary);
+            transition: height 0.5s ease-in-out, transform 0.3s ease-in-out;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+            position: relative;
+        }
+        .chart-bar:hover { transform: scale(1.05); filter: brightness(1.1); }
+        .bar-label {
+            position: absolute;
+            top: -1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 0.75rem;
+            color: #4A5568;
+            font-weight: 600;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-[var(--muted)] text-gray-800 min-h-screen flex flex-col">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-[var(--primary)] text-white px-6 py-4 flex flex-col md:flex-row items-center justify-between shadow-lg">
+        <div class="flex items-center gap-6 mb-3 md:mb-0">
+            <a href="index.html" class="brand text-2xl font-extrabold tracking-wider flex items-center gap-2 text-shadow-md">
+                <span class="brand-icon text-3xl">📚</span>
+                HKD STORE
+            </a>
+            <nav class="nav-links flex gap-6 text-sm font-medium">
+                <a href="/about">About Us</a>
+                <a href="/sach">Sách</a>
+                <a href="/khachhang">Khách Hàng</a>
+                <a href="/nhanvien">Nhân Viên</a>
+                <a href="/giaodich">Giao Dịch</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow container mx-auto p-4 md:p-8 flex items-center justify-center">
+        <section class="card bg-[var(--card)] rounded-2xl shadow-2xl p-8 max-w-6xl w-full">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 drop-shadow-md">Hoạt động kinh doanh</h2>
+                <h3 class="text-lg md:text-xl font-medium text-gray-700 mt-2">Tổng quan quý III năm 2025</h3>
+            </div>
+
+            <div class="text-center mb-6">
+                <h4 class="text-xl font-bold text-gray-900">Biểu đồ Doanh thu theo tháng (triệu VNĐ)</h4>
+            </div>
+
+            <!-- Biểu đồ doanh thu -->
+            <div class="chart-container bg-gray-50 rounded-xl p-6 mx-auto mb-10 shadow-inner border border-gray-200 relative">
+                <div class="absolute left-6 bottom-6 flex flex-col justify-between h-[80%]">
+                    <span class="text-xs text-gray-500">200</span>
+                    <span class="text-xs text-gray-500">150</span>
+                    <span class="text-xs text-gray-500">100</span>
+                    <span class="text-xs text-gray-500">50</span>
+                    <span class="text-xs text-gray-500">0</span>
+                </div>
+                <div class="absolute left-16 right-6 bottom-6 flex justify-around items-end h-[80%]">
+                    <div class="flex flex-col items-center justify-end w-1/4 h-full">
+                        <div class="chart-bar w-full" style="height: 55%;">
+                            <span class="bar-label">110.0</span>
+                        </div>
+                        <span class="mt-4 text-sm text-gray-700 font-medium">Tháng 7</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-end w-1/4 h-full">
+                        <div class="chart-bar w-full" style="height: 80%;">
+                            <span class="bar-label">160.0</span>
+                        </div>
+                        <span class="mt-4 text-sm text-gray-700 font-medium">Tháng 8</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-end w-1/4 h-full">
+                        <div class="chart-bar w-full" style="height: 65%;">
+                            <span class="bar-label">130.0</span>
+                        </div>
+                        <span class="mt-4 text-sm text-gray-700 font-medium">Tháng 9</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Các panel -->
+            <div class="two-col grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+
+                <!-- Danh mục sách -->
+                <a href="/sach" class="block">
+                    <div class="panel card bg-[var(--accent)] p-6 rounded-xl shadow-md border border-gray-200 transform transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer">
+                        <h3 class="text-xl font-bold mb-3 text-[var(--primary)]">Danh mục sách</h3>
+                        <div class="bg-gray-100 rounded-md border border-gray-200 p-3 h-48 overflow-auto">
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="flex items-center justify-between">
+                                    <span class="flex items-center"><i class="fas fa-medal text-yellow-500 mr-2"></i>"Nhà giả kim"</span>
+                                    <span class="text-xs font-semibold text-green-600 px-2 py-1 bg-green-100 rounded-full">Còn hàng</span>
+                                </li>
+                                <li class="flex items-center justify-between">
+                                    <span class="flex items-center"><i class="fas fa-medal text-gray-400 mr-2"></i>"Hoàng tử bé"</span>
+                                    <span class="text-xs font-semibold text-red-600 px-2 py-1 bg-red-100 rounded-full">Hết hàng</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="panel-footer flex gap-3 mt-4 flex-wrap">
+                            <button class="small-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors transform hover:-translate-y-0.5 shadow-md">➕ Thêm</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Khách hàng -->
+                <a href="/khachhang" class="block">
+                    <div class="panel card bg-[var(--accent)] p-6 rounded-xl shadow-md border border-gray-200 transform transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer">
+                        <h3 class="text-xl font-bold mb-3 text-[var(--primary)]">Khách hàng</h3>
+                        <div class="bg-gray-100 rounded-md border border-gray-200 p-3 h-48 overflow-auto">
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="flex items-center"><i class="fas fa-star text-yellow-500 mr-2"></i>Trần Văn A (Khách VIP)</li>
+                                <li class="flex items-center"><i class="fas fa-user-circle text-[var(--secondary)] mr-2"></i>Lê Thị B (Thành viên)</li>
+                            </ul>
+                        </div>
+                        <div class="panel-footer flex gap-3 mt-4 flex-wrap">
+                            <button class="small-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors transform hover:-translate-y-0.5 shadow-md">➕ Thêm</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Tổng doanh thu -->
+                <a href="/giaodich" class="block">
+                    <div class="panel card bg-[var(--accent)] p-6 rounded-xl shadow-md border border-gray-200 transform transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer">
+                        <h3 class="text-xl font-bold mb-3 text-[var(--primary)]">Tổng Doanh thu</h3>
+                        <div class="bg-gray-100 rounded-md border border-gray-200 p-3 h-48 flex flex-col items-center justify-center">
+                            <p class="text-center font-bold text-4xl text-[var(--secondary)] drop-shadow-md">400 tr</p>
+                            <p class="text-lg text-gray-500 mt-2">Quý III năm 2025</p>
+                        </div>
+                        <div class="panel-footer flex gap-3 mt-4 flex-wrap">
+                            <button class="small-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors transform hover:-translate-y-0.5 shadow-md">➕ Thêm</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Giao dịch -->
+                <a href="/giaodich" class="block">
+                    <div class="panel card bg-[var(--accent)] p-6 rounded-xl shadow-md border border-gray-200 transform transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer">
+                        <h3 class="text-xl font-bold mb-3 text-[var(--primary)]">Giao dịch</h3>
+                        <div class="bg-gray-100 rounded-md border border-gray-200 p-3 h-48 overflow-auto">
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>#GD1001 - 250,000 VNĐ</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>#GD1002 - 120,000 VNĐ</li>
+                            </ul>
+                        </div>
+                        <div class="panel-footer flex gap-3 mt-4 flex-wrap">
+                            <button class="small-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors transform hover:-translate-y-0.5 shadow-md">➕ Thêm</button>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+            <!-- Đánh giá khách hàng -->
+            <div class="mt-12 text-center">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 drop-shadow-sm">Đánh giá của khách hàng</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="review-card bg-[var(--accent)] p-6 rounded-xl shadow-md border border-gray-200">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-[var(--secondary)] flex items-center justify-center text-white font-bold text-xl mr-4 drop-shadow-sm">TV</div>
+                            <div>
+                                <p class="font-bold text-[var(--primary)]">Trần Văn An</p>
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"Sách chất lượng tốt, giao hàng rất nhanh. Chắc chắn sẽ quay lại mua sắm lần sau!"</p>
+                    </div>
+
+                    <div class="review-card bg-[var(--accent)] p-6 rounded-xl shadow-md border border-gray-200">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-[var(--secondary)] flex items-center justify-center text-white font-bold text-xl mr-4 drop-shadow-sm">LT</div>
+                            <div>
+                                <p class="font-bold text-[var(--primary)]">Lê Thị B</p>
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"Sách hay, đóng gói cẩn thận. Tuy nhiên, thời gian giao hàng hơi chậm một chút so với dự kiến."</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+</body>
+</html>

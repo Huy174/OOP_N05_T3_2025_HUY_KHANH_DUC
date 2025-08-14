@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Khách Hàng - HKD STORE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 0; padding: 0; color: #333; }
+        .navbar { background-color: #6F4E37; color: white; padding: 15px 0; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        .logo { font-size: 24px; font-weight: bold; display: flex; align-items: center; }
+        .logo i { margin-right: 10px; }
+        .container { max-width: 1200px; margin: 20px auto; background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
+        h1, h2 { text-align: center; color: #6F4E37; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        table th, table td { border: 1px solid #ddd; padding: 10px; text-align: center; }
+        table th { background-color: #6F4E37; color: white; }
+        form { margin-top: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+        input { padding: 8px; border: 1px solid #ccc; border-radius: 5px; }
+        button { padding: 8px 12px; border: none; border-radius: 5px; cursor: pointer; }
+        .delete-btn { background: #d9534f; color: white; text-decoration: none; padding: 5px 8px; border-radius: 4px; }
+        .delete-btn:hover { background: #c9302c; }
+        .edit-btn { background: #3498db; color: white; text-decoration: none; padding: 5px 8px; border-radius: 4px; }
+        .edit-btn:hover { background: #2980b9; }
+        .back-btn { display: inline-block; margin-top: 20px; background: #6F4E37; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; }
+        .back-btn:hover { background: #5a3c2a; }
+        .search-bar { margin-bottom: 20px; display: flex; gap: 10px; max-width: 400px; }
+        .search-bar input { flex: 1; padding: 8px; border-radius: 5px; border: 1px solid #ccc; }
+        .add-btn { background: #6F4E37; color: white; }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="nav-container">
+        <div class="logo"><i class="fas fa-users"></i> Quản lý Khách Hàng</div>
+    </div>
+</div>
+
+<div class="container">
+    <h1>Danh Sách Khách Hàng</h1>
+
+    <div class="search-bar">
+        <input type="text" id="searchKeyword" placeholder="Nhập tên hoặc số điện thoại...">
+        <button type="button" class="add-btn" onclick="timKhachHang()">🔍 Tìm kiếm</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Mã KH</th>
+                <th>Tên Khách Hàng</th>
+                <th>Số Điện Thoại</th>
+                <th>Email</th>
+                <th>Địa Chỉ</th>
+                <th>Hành Động</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+
+    <h2>Thêm / Sửa Khách Hàng</h2>
+    <form id="formKhachHang">
+        <input type="text" id="maKH" placeholder="Mã KH" required>
+        <input type="text" id="ten" placeholder="Tên Khách Hàng" required>
+        <input type="text" id="sdt" placeholder="Số Điện Thoại" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="text" id="diaChi" placeholder="Địa Chỉ" required>
+        <button type="submit" class="add-btn">➕ Lưu Khách Hàng</button>
+    </form>
+
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Quay lại</a>
+</div>
+
+<script>
+const tableBody = document.getElementById('tableBody');
+const form = document.getElementById('formKhachHang');
+const maKHInput = document.getElementById('maKH');
+const tenInput = document.getElementById('ten');
+const sdtInput = document.getElementById('sdt');
+const emailInput = document.getElementById('email');
+const diaChiInput = document.getElementById('diaChi');
+
+// Dữ liệu ví dụ
+let danhSachKhachHang = [
+    {maKH:'KH001', ten:'Nguyễn Văn A', sdt:'0912345678', email:'a@gmail.com', diaChi:'Hà Nội'},
+    {maKH:'KH002', ten:'Trần Thị B', sdt:'0987654321', email:'b@gmail.com', diaChi:'Hải Phòng'},
+    {maKH:'KH003', ten:'Lê Văn C', sdt:'0909123456', email:'c@gmail.com', diaChi:'Đà Nẵng'}
+];
+
+// Lưu vào localStorage
+function luuLocalStorage(){
+    localStorage.setItem('danhSachKhachHang', JSON.stringify(danhSachKhachHang));
+}
+
+// Load dữ liệu từ localStorage
+function loadLocalStorage(){
+    const data = localStorage.getItem('danhSachKhachHang');
+    if(data){
+        danhSachKhachHang = JSON.parse(data);
+    }
+}
+
+// Render bảng
+function renderTable(ds){
+    tableBody.innerHTML = '';
+    if(ds.length === 0){
+        tableBody.innerHTML = '<tr><td colspan="6" class="text-center">Chưa có khách hàng nào</td></tr>';
+        return;
+    }
+    ds.forEach(kh => {
+        const tr = document.createElement('tr');
+        tr.setAttribute('data-makh', kh.maKH);
+        tr.innerHTML = `
+            <td>${kh.maKH}</td>
+            <td>${kh.ten}</td>
+            <td>${kh.sdt}</td>
+            <td>${kh.email}</td>
+            <td>${kh.diaChi}</td>
+            <td>
+                <button class="edit-btn" onclick="suaKhachHang('${kh.maKH}')">✍️ Sửa</button>
+                <button class="delete-btn" onclick="xoaKhachHang('${kh.maKH}')">🗑️ Xóa</button>
+            </td>
+        `;
+        tableBody.appendChild(tr);
+    });
+}
+
+// Thêm / Sửa
+form.addEventListener('submit', e=>{
+    e.preventDefault();
+    const maKH = maKHInput.value.trim();
+    const ten = tenInput.value.trim();
+    const sdt = sdtInput.value.trim();
+    const email = emailInput.value.trim();
+    const diaChi = diaChiInput.value.trim();
+
+    if(!maKH || !ten || !sdt || !email || !diaChi){
+        alert('Vui lòng nhập đầy đủ thông tin');
+        return;
+    }
+
+    const existing = danhSachKhachHang.find(k => k.maKH === maKH);
+    if(existing){
+        existing.ten = ten;
+        existing.sdt = sdt;
+        existing.email = email;
+        existing.diaChi = diaChi;
+    } else {
+        danhSachKhachHang.push({maKH, ten, sdt, email, diaChi});
+    }
+
+    luuLocalStorage();
+    renderTable(danhSachKhachHang);
+    form.reset();
+});
+
+// Xóa
+function xoaKhachHang(ma){
+    if(!confirm('Bạn có chắc muốn xóa khách hàng này?')) return;
+    danhSachKhachHang = danhSachKhachHang.filter(k => k.maKH !== ma);
+    luuLocalStorage();
+    renderTable(danhSachKhachHang);
+}
+
+// Sửa (đưa dữ liệu vào form)
+function suaKhachHang(ma){
+    const kh = danhSachKhachHang.find(k => k.maKH === ma);
+    if(kh){
+        maKHInput.value = kh.maKH;
+        tenInput.value = kh.ten;
+        sdtInput.value = kh.sdt;
+        emailInput.value = kh.email;
+        diaChiInput.value = kh.diaChi;
+    }
+}
+
+// Tìm kiếm front-end
+function timKhachHang(){
+    const kw = document.getElementById('searchKeyword').value.toLowerCase();
+    const filtered = danhSachKhachHang.filter(k => 
+        k.ten.toLowerCase().includes(kw) || k.sdt.includes(kw)
+    );
+    renderTable(filtered);
+}
+
+// Khởi tạo
+loadLocalStorage();
+renderTable(danhSachKhachHang);
+</script>
+
+</body>
+</html>

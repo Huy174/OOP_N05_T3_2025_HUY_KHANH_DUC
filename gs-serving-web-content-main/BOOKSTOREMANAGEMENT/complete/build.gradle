@@ -1,0 +1,33 @@
+plugins {
+	id 'org.springframework.boot' version '3.3.0'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	
+	// Thêm Spring Data JPA
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	
+	// Thêm driver cơ sở dữ liệu (ví dụ H2 database)
+	runtimeOnly 'com.h2database:h2'
+
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}

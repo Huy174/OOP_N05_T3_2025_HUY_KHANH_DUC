@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý Giao dịch</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body class="container mt-4">
+
+<h2 class="mb-3 text-primary">Quản lý Giao dịch</h2>
+
+<a href="index.html" class="btn btn-secondary btn-sm mb-3">
+    <i class="bi bi-arrow-left"></i> Quay lại
+</a>
+
+<!-- Tổng doanh thu -->
+<div class="alert alert-success d-flex align-items-center">
+    <i class="bi bi-currency-dollar me-2"></i>
+    <strong>Tổng doanh thu: </strong> 
+    <span id="tongDoanhThu" class="ms-1">0</span> VNĐ
+</div>
+
+<!-- Form thêm/sửa giao dịch -->
+<div class="card mb-4 shadow-sm">
+    <div class="card-header bg-primary text-white">
+        <i class="bi bi-plus-circle"></i>
+        <span>Thêm/Sửa giao dịch</span>
+    </div>
+    <div class="card-body">
+        <form id="formGiaoDich">
+            <div class="row g-3 mb-3">
+                <div class="col-md-3">
+                    <label class="form-label">Mã GD:</label>
+                    <input type="text" name="maGiaoDich" class="form-control" placeholder="Nhập mã GD"/>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Mã khách hàng:</label>
+                    <input type="text" name="maKhachHang" class="form-control" placeholder="Nhập mã KH"/>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Tổng tiền:</label>
+                    <input type="number" name="tongTien" class="form-control" placeholder="Nhập tổng tiền"/>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Lưu</button>
+        </form>
+    </div>
+</div>
+
+<!-- Form tìm kiếm -->
+<div class="mb-3 d-flex">
+    <input type="text" id="timKiemInput" class="form-control me-2" placeholder="Tìm theo mã GD"/>
+    <button id="btnTimKiem" class="btn btn-warning"><i class="bi bi-search"></i> Tìm</button>
+    <button id="btnHienThiTatCa" class="btn btn-secondary ms-2">Hiển thị tất cả</button>
+</div>
+
+<!-- Bảng danh sách giao dịch -->
+<h5>Danh sách giao dịch</h5>
+<table class="table table-hover table-striped table-bordered align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>Mã GD</th>
+            <th>Mã khách hàng</th>
+            <th>Tổng tiền</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+        <tr>
+            <td colspan="4" class="text-center">Chưa có giao dịch nào</td>
+        </tr>
+    </tbody>
+</table>
+
+<script>
+const tableBody = document.getElementById('tableBody');
+const form = document.getElementById('formGiaoDich');
+const inputMaGD = form.querySelector('input[name=maGiaoDich]');
+const inputMaKH = form.querySelector('input[name=maKhachHang]');
+const inputTongTien = form.querySelector('input[name=tongTien]');
+const spanTongDoanhThu = document.getElementById('tongDoanhThu');
+const timKiemInput = document.getElementById('timKiemInput');
+const btnTimKiem = document.getElementById('btnTimKiem');
+const btnHienThiTatCa = document.getElementById('btnHienThiTatCa');
+
+// Load dữ liệu từ LocalStorage hoặc mảng rỗng
+let giaoDichList = JSON.parse(localStorage.getItem('giaoDichList')) || [];
+
+// Reset form
+function resetForm(){
+    inputMaGD.value = '';
+    inputMaKH.value = '';
+    inputTongTien.value = '';
+}
+
+// Cập nhật tổng doanh thu
+function capNhatTongDoanhThu(){
+    const tong = giaoDichList.reduce((sum, gd)=> sum + gd.tongTien, 0);
+    spanTongDoanhThu.textContent = tong;
+}
+
+// Lưu LocalStorage
+function luuLocal(){
+    localStorage.setItem('giaoDichList', JSON.stringify(giaoDichList));
+}
+
+// Render bảng
+function renderTable(data){
+    tableBody.innerHTML = '';
+    if(data.length === 0){
+        tableBody.innerHTML = '<tr><td colspan="4" class="text-center">Chưa có giao dịch nào</td></tr>';
+        capNhatTongDoanhThu();
+        return;
+    }
+    data.forEach(gd=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${gd.maGiaoDich}</td>
+            <td>${gd.maKhachHang}</td>
+            <td>${gd.tongTien}</td>
+            <td>
+                <button class="btn btn-info btn-sm" onclick="sua('${gd.maGiaoDich}')">
+                    <i class="bi bi-pencil-square"></i> Sửa
+                </button>
+                <button class="btn btn-danger btn-sm" onclick="xoa('${gd.maGiaoDich}')">
+                    <i class="bi bi-trash"></i> Xóa
+                </button>
+            </td>
+        `;
+        tableBody.appendChild(tr);
+    });
+    capNhatTongDoanhThu();
+}
+
+// Thêm / Sửa
+function addOrUpdateGD(maGD, maKH, tongTien){
+    const index = giaoDichList.findIndex(gd => gd.maGiaoDich === maGD);
+    if(index !== -1){
+        giaoDichList[index] = {maGiaoDich: maGD, maKhachHang: maKH, tongTien};
+    } else {
+        giaoDichList.push({maGiaoDich: maGD, maKhachHang: maKH, tongTien});
+    }
+    luuLocal();
+    renderTable(giaoDichList);
+}
+
+// Xóa
+function xoa(maGD){
+    if(!confirm('Bạn có chắc muốn xóa?')) return;
+    giaoDichList = giaoDichList.filter(gd => gd.maGiaoDich !== maGD);
+    luuLocal();
+    renderTable(giaoDichList);
+}
+
+// Sửa
+function sua(maGD){
+    const gd = giaoDichList.find(gd => gd.maGiaoDich === maGD);
+    if(gd){
+        inputMaGD.value = gd.maGiaoDich;
+        inputMaKH.value = gd.maKhachHang;
+        inputTongTien.value = gd.tongTien;
+    }
+}
+
+// Submit form
+form.addEventListener('submit', e=>{
+    e.preventDefault();
+    const maGD = inputMaGD.value.trim();
+    const maKH = inputMaKH.value.trim();
+    const tongTien = parseFloat(inputTongTien.value);
+
+    if(!maGD || !maKH || isNaN(tongTien)){
+        alert('Vui lòng nhập đầy đủ thông tin hợp lệ');
+        return;
+    }
+
+    addOrUpdateGD(maGD, maKH, tongTien);
+    resetForm();
+});
+
+// Tìm kiếm
+btnTimKiem.addEventListener('click', ()=>{
+    const ma = timKiemInput.value.trim();
+    if(!ma){
+        alert('Nhập mã GD để tìm');
+        return;
+    }
+    const result = giaoDichList.filter(gd => gd.maGiaoDich.includes(ma));
+    renderTable(result);
+});
+
+// Hiển thị tất cả
+btnHienThiTatCa.addEventListener('click', ()=>{
+    renderTable(giaoDichList);
+    timKiemInput.value = '';
+});
+
+// Render lần đầu
+renderTable(giaoDichList);
+</script>
+
+</body>
+</html>
